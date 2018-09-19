@@ -51,6 +51,7 @@ export default {
                 on-contextmenu={ ($event) => this.handleContextMenu($event, row) }
                 on-mouseenter={ _ => this.handleMouseEnter($index) }
                 on-mouseleave={ _ => this.handleMouseLeave() }
+                on-dragstart={ () => this.handleDragstart($index) }
                 class={ [this.getRowClass(row, $index)] }>
                 {
                   this._l(this.columns, (column, cellIndex) => {
@@ -356,6 +357,11 @@ export default {
 
     handleMouseLeave() {
       this.store.commit('setHoverRow', null);
+    },
+
+    handleDragstart(index) {
+      console.log(index);
+      this.table.$emit('dragstart', index);
     },
 
     handleContextMenu(event, row) {
